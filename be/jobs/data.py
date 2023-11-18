@@ -46,23 +46,20 @@ class Data:
         ...
         """
         return [
-            [
-                {
-                    "truckId": 358,
-                    "notifications": [
-                        {"timestamp":"2023-11-17T18:41:19","loadId":10408,"originLatitude":42.7893,"originLongitude":-73.9809,"destinationLatitude":41.7761,"destinationLongitude":-72.5213,"equipmentType":"Van","price":497.0,"mileage":129.0},
-                        {"timestamp":"2023-11-17T09:31:59","loadId":10987,"originLatitude":39.19,"originLongitude":-76.72,"destinationLatitude":41.29,"destinationLongitude":-81.48,"equipmentType":"Van","price":650.0,"mileage":350.0}
-                    ]
-                },
-                {
-                    "truckId": 268,
-                    "notifications": [
-                        {"timestamp":"2023-11-17T18:41:19","loadId":10408,"originLatitude":42.7893,"originLongitude":-73.9809,"destinationLatitude":41.7761,"destinationLongitude":-72.5213,"equipmentType":"Van","price":497.0,"mileage":129.0},
-                        {"timestamp":"2023-11-17T09:31:59","loadId":10987,"originLatitude":39.19,"originLongitude":-76.72,"destinationLatitude":41.29,"destinationLongitude":-81.48,"equipmentType":"Van","price":650.0,"mileage":350.0}
-                    ]
-                } 
-
-            ]
+            {
+                "truckId": 358,
+                "notifications": [
+                    {"timestamp":"2023-11-17T18:41:19","loadId":10408,"originLatitude":42.7893,"originLongitude":-73.9809,"destinationLatitude":41.7761,"destinationLongitude":-72.5213,"equipmentType":"Van","price":497.0,"mileage":129.0},
+                    {"timestamp":"2023-11-17T09:31:59","loadId":10987,"originLatitude":39.19,"originLongitude":-76.72,"destinationLatitude":41.29,"destinationLongitude":-81.48,"equipmentType":"Van","price":650.0,"mileage":350.0}
+                ]
+            },
+            {
+                "truckId": 268,
+                "notifications": [
+                    {"timestamp":"2023-11-17T18:41:19","loadId":10408,"originLatitude":42.7893,"originLongitude":-73.9809,"destinationLatitude":41.7761,"destinationLongitude":-72.5213,"equipmentType":"Van","price":497.0,"mileage":129.0},
+                    {"timestamp":"2023-11-17T09:31:59","loadId":10987,"originLatitude":39.19,"originLongitude":-76.72,"destinationLatitude":41.29,"destinationLongitude":-81.48,"equipmentType":"Van","price":650.0,"mileage":350.0}
+                ]
+            } 
         ]
 
 
