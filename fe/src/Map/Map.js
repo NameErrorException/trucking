@@ -14,7 +14,7 @@
 //     )
 // }
 function setOriginFromJson(directionsService, directionsRenderer) {
-  fetch('./mmap.json') // Replace 'your_file.json' with the actual path to your JSON file
+  fetch('./Map.json') // Replace 'your_file.json' with the actual path to your JSON file
     .then(response => response.json())
     .then(data => {
       if (data.lat && data.lng) {
