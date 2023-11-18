@@ -1,18 +1,5 @@
-// import React,{useState, useEffect} from "react";
-
-// function getData() {
-//     const [data, setData] = useState([{}])
-
-//     useEffect(() => {
-//         fetch("/data")
-//     })
-//     return (
-//         <div>
 
 
-//         </div>
-//     )
-// }
 function setOriginFromJson(directionsService, directionsRenderer) {
   fetch('./Map.json') // Replace 'your_file.json' with the actual path to your JSON file
     .then(response => response.json())
@@ -92,39 +79,3 @@ function initMap() {
   window.initMap = initMap;
 
 
-// Function to load data from a JSON file and set the origin for the route
-
-// Callback function for the Google Maps API
-// function initMap() {
-//   const directionsService = new google.maps.DirectionsService();
-//   const directionsRenderer = new google.maps.DirectionsRenderer();
-//   const map = new google.maps.Map(document.getElementById("map"), {
-//     zoom: 6,
-//     center: { lat: 41.85, lng: -87.65 },
-//   });
-
-//   directionsRenderer.setMap(map);
-
-//   document.getElementById("submit").addEventListener("click", () => {
-//     setOriginFromJson(directionsService, directionsRenderer);
-//   });
-// }
-
-// // Helper function to get selected waypoints
-// function getSelectedWaypoints() {
-//   const waypts = [];
-//   const checkboxArray = document.getElementById("waypoints");
-
-//   for (let i = 0; i < checkboxArray.length; i++) {
-//     if (checkboxArray.options[i].selected) {
-//       waypts.push({
-//         location: checkboxArray[i].value,
-//         stopover: true,
-//       });
-//     }
-//   }
-
-//   return waypts;
-// }
-
-// window.initMap = initMap;

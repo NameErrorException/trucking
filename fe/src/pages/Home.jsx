@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Truck from './Truck';
 import GoogleMap from "./FullPageMap"
+import MapComponent from './MapAsset/mapComponent';
+
 
 
 export default function Home() {
@@ -13,7 +14,8 @@ export default function Home() {
   return (
     
     <>
-
+    
+     
     <div className="text-gray-400 bg-gray-900 body-font" >
         
     <header>
@@ -30,7 +32,8 @@ export default function Home() {
     </div>
     </header>
     <div className='ml-10 h-screen w-screen bg-gray-900'>
-      <GoogleMap />
+      <MapComponent />
+
     </div>
     <div className="flex flex-wrap">
         {/* Sidebar */}
