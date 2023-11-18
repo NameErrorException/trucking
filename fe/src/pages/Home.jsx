@@ -29,12 +29,12 @@ export default function Home() {
     </nav>
     </div>
     </header>
-    <div className='h-screen w-screen bg-gray-900'>
+    <div className='ml-10 h-screen w-screen bg-gray-900'>
       <GoogleMap />
     </div>
     <div className="flex flex-wrap">
         {/* Sidebar */}
-        <aside className=" mt-16 text-gray-400 bg-gray-900 body-font w-1/5 overflow-y-auto h-screen fixed top-0 left-0">
+        <aside className=" mt-16 text-gray-400 bg-gray-900 body-font w-1/5 overflow-y-auto h-screen fixed top-0 right-10">
           <div className="container mx-auto flex flex-col items-center p-5">
             <a className="flex title-font font-medium items-center text-white mb-4">
               <span className="ml-3 text-lg hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Truck Info</span>
