@@ -1,4 +1,4 @@
 paho-mqtt
 Flask
-cv2
+opencv-python
 ultralytics

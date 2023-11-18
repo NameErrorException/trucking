@@ -42,7 +42,7 @@ class Data:
 
         notification:
             - return load data without seq and type
-            - TODO: add return type
+            - TODO: add message within the {} for each notification for a truck
         ...
         """
         return [
