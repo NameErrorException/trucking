@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 
 class Data:
+# ...
     def __init__(self):
         self.client = mqtt.Client(client_id="NNE02", clean_session=True)
         self.client.username_pw_set("CodeJamUser", "123CodeJam")
