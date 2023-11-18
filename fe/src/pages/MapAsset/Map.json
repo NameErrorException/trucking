@@ -1,0 +1,48 @@
+[
+    {
+        "equipType": "Flatbed",
+        "nextTripLengthPreference": "Short",
+        "positionLatitude": 36.94601821899414,
+        "positionLongitude": -81.04188537597656,
+        "seq": 1935,
+        "timestamp": "2023-11-17T18:43:37",
+        "truckId": 358,
+        "type": "Truck"
+    },
+    {
+        "equipType": "Van",
+        "nextTripLengthPreference": "Short",
+        "positionLatitude": 39.38967514038086,
+        "positionLongitude": -84.36373138427734,
+        "seq": 1926,
+        "timestamp": "2023-11-17T18:42:46",
+        "truckId": 268,
+        "type": "Truck"
+    },
+    {
+        "destinationLatitude": 41.7761,
+        "destinationLongitude": -72.5213,
+        "equipmentType": "Van",
+        "loadId": 10408,
+        "mileage": 129,
+        "originLatitude": 42.7893,
+        "originLongitude": -73.9809,
+        "price": 497,
+        "seq": 1921,
+        "timestamp": "2023-11-17T18:41:19",
+        "type": "Load"
+    },
+    {
+        "destinationLatitude": 41.29,
+        "destinationLongitude": -81.48,
+        "equipmentType": "Van",
+        "loadId": 10987,
+        "mileage": 350,
+        "originLatitude": 39.19,
+        "originLongitude": -76.72,
+        "price": 650,
+        "seq": 131,
+        "timestamp": "2023-11-17T09:31:59",
+        "type": "Load"
+    }
+]
