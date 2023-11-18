@@ -64,7 +64,7 @@ const MapComponent = () => {
   return (
     <div>
       {/* The map container */}
-      <div id="map" style={{ height: '400px', width: '50%' }}></div>
+      <div id="map" style={{ height: '800px', width: '70%' }}></div>
       <div id="sidebar">
         <div>
           <b>Start:</b>
