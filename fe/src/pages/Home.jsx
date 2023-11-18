@@ -1,20 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import GoogleMap from "./FullPageMap"
 import MapComponent from './MapAsset/mapComponent';
 
 
-
 export default function Home() {
-    let navigate = useNavigate();
-    const routeChange = () =>{
-    let path = '/truck';
-    navigate(path)
-}
+  let navigate = useNavigate();
+  const routeChange = () =>{
+  let path = '/truck';
+  navigate(path)
+  }
+  //fatch data
+  const [users, setUsers] = useState([])
+
+  const fetchUserData = () => {
+    fetch("http://127.0.0.1:5000/data")
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setUsers(data)
+      })
+  }
+
+  useEffect(() => {
+    fetchUserData()
+    
+  }, [])
+
   return (
     
     <>
-    
+    <div>
+      {users.length > 0 && (
+        <ul> 
+          {users.map(user => (
+            <li key={user.id}> {console.log(users)}{user.name}</li>
+          ))}
+        </ul>
+      )}
+    </div>
      
     <div className="text-gray-400 bg-gray-900 body-font" >
         
