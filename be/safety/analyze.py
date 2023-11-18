@@ -20,13 +20,13 @@ class Analyze:
         # typical constants
         rho = 1                     # distance resolution in pixels of the Hough grid
         theta = np.pi / 180         # angular resolution in radians of the Hough grid
-        threshold = 15              # minimum number of votes (intersections in Hough grid cell)
-        min_line_length = 40        # minimum number of pixels making up a line
-        max_line_gap = 5            # maximum gap in pixels between connectable line segments
+        threshold = 0              # minimum number of votes (intersections in Hough grid cell)
+        min_line_length = 0        # minimum number of pixels making up a line
+        max_line_gap = 300            # maximum gap in pixels between connectable line segments
         line_image = np.copy(frame) * 0  # creating a blank to draw lines on
 
         # crop and get region
-        triangle = np.array([[300, 720], [980, 720], [640, 500]])
+        triangle = np.array([[100, 720], [1180, 720], [640, 500]])
 
         mask = cv2.fillPoly(np.zeros_like(highlighted_frame), [triangle], 255)
         masked_frame = cv2.bitwise_and(highlighted_frame, highlighted_frame, mask=mask)
@@ -38,21 +38,20 @@ class Analyze:
         try:
             for line in lines:
                 for x1,y1,x2,y2 in line:
-                    cv2.line(line_image, (x1,y1), (x2,y2), (255,0,0), 5)
+                    cv2.line(line_image, (x1,y1), (x2,y2), (255,0,0), 25)
 
             return cv2.addWeighted(frame, 0.8, line_image, 1, 0)
         except:
             return frame
 
     def frame(self, frame):
-
+        # edge detect
         highlighted_frame = self.highlight_edge(frame)
+        anotated_frame = self.get_line(frame, highlighted_frame)
 
         # track car
-        # results = self.model.track(frame, persist=True, verbose=False)
-        # anotated_frame = results[0].plot()
-        
-        anotated_frame = self.get_line(frame, highlighted_frame)
+        results = self.model.track(anotated_frame, persist=True, verbose=False)
+        anotated_frame = results[0].plot()
 
         return anotated_frame
 

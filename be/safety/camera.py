@@ -7,7 +7,7 @@ class Camera:
     NOTE: camera will be a video for the purpose of the demo, however all processing is done in real time.
     """
     path = "be/safety/data/"
-    video_file = "driving2.mp4"
+    video_file = "driving3.mp4"
 
     # initialize model
     analyze = Analyze()
