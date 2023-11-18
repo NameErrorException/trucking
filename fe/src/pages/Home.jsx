@@ -1,9 +1,54 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Truck from './Truck';
+
 
 export default function Home() {
-    return (
-        <>
-        lol
-        </>
-    )
+    let navigate = useNavigate();
+    const routeChange = () =>{
+    let path = '/truck';
+    navigate(path)
+}
+  return (
+    
+    <>
+
+    <div class="text-gray-400 bg-gray-900 body-font" >
+        
+    <header>
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+      <span class="ml-3 text-xl">123 LoadBoard</span>
+    </a>
+    <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+      <a class="mr-5 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105">First Link</a>
+      <a class="mr-5 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Second Link</a>
+      <a class="mr-5 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Third Link</a>
+      <a class="mr-5 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Fourth Link</a>
+    </nav>
+    </div>
+    </header>
+    
+    <div className="flex flex-wrap">
+        {/* Sidebar */}
+        <aside className=" mt-16 text-gray-400 bg-gray-900 body-font w-1/5 overflow-y-auto h-screen fixed top-0 left-0">
+          <div className="container mx-auto flex flex-col items-center p-5">
+            <a className="flex title-font font-medium items-center text-white mb-4">
+              <span className="ml-3 text-lg hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Truck Info</span>
+            </a>
+            <nav className="md:ml-auto md:mr-auto flex flex-col items-center text-base">
+              <button className="mb-4 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onClick={routeChange}>Sidebar Link 1</button>
+              <a className="mb-4 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105 ">Sidebar Link 2</a>
+              <a className="mb-4 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Sidebar Link 3</a>
+              <a className="mb-4 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Sidebar Link 3</a>
+              <a className="hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Sidebar Link 4</a>
+            </nav>
+          </div>
+        </aside>
+     </div>
+
+   </div>
+
+    </>
+  );
 }
