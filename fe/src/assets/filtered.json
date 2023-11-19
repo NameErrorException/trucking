@@ -1,0 +1,932 @@
+[
+    {
+      "load_event_id": 368,
+      "load_id": 10102,
+      "truck_event_id": 325,
+      "truck_id": 300
+    },
+    {
+      "load_event_id": 367,
+      "load_id": 10021,
+      "truck_event_id": 229,
+      "truck_id": 149
+    },
+    {
+      "load_event_id": 8,
+      "load_id": 10517,
+      "truck_event_id": 248,
+      "truck_id": 331
+    },
+    {
+      "load_event_id": 278,
+      "load_id": 11036,
+      "truck_event_id": 29,
+      "truck_id": 172
+    },
+    {
+      "load_event_id": 391,
+      "load_id": 10650,
+      "truck_event_id": 444,
+      "truck_id": 128
+    },
+    {
+      "load_event_id": 281,
+      "load_id": 10458,
+      "truck_event_id": 148,
+      "truck_id": 271
+    },
+    {
+      "load_event_id": 411,
+      "load_id": 10959,
+      "truck_event_id": 376,
+      "truck_id": 135
+    },
+    {
+      "load_event_id": 364,
+      "load_id": 10760,
+      "truck_event_id": 32,
+      "truck_id": 185
+    },
+    {
+      "load_event_id": 167,
+      "load_id": 10417,
+      "truck_event_id": 79,
+      "truck_id": 127
+    },
+    {
+      "load_event_id": 2,
+      "load_id": 10034,
+      "truck_event_id": 133,
+      "truck_id": 121
+    },
+    {
+      "load_event_id": 9,
+      "load_id": 10635,
+      "truck_event_id": 302,
+      "truck_id": 217
+    },
+    {
+      "load_event_id": 41,
+      "load_id": 40020,
+      "truck_event_id": 245,
+      "truck_id": 238
+    },
+    {
+      "load_event_id": 264,
+      "load_id": 10808,
+      "truck_event_id": 379,
+      "truck_id": 236
+    },
+    {
+      "load_event_id": 436,
+      "load_id": 10487,
+      "truck_event_id": 359,
+      "truck_id": 360
+    },
+    {
+      "load_event_id": 186,
+      "load_id": 10577,
+      "truck_event_id": 284,
+      "truck_id": 179
+    },
+    {
+      "load_event_id": 139,
+      "load_id": 10135,
+      "truck_event_id": 439,
+      "truck_id": 232
+    },
+    {
+      "load_event_id": 7,
+      "load_id": 10609,
+      "truck_event_id": 313,
+      "truck_id": 215
+    },
+    {
+      "load_event_id": 202,
+      "load_id": 10085,
+      "truck_event_id": 155,
+      "truck_id": 142
+    },
+    {
+      "load_event_id": 18,
+      "load_id": 10509,
+      "truck_event_id": 34,
+      "truck_id": 185
+    },
+    {
+      "load_event_id": 339,
+      "load_id": 10491,
+      "truck_event_id": 412,
+      "truck_id": 179
+    },
+    {
+      "load_event_id": 119,
+      "load_id": 10131,
+      "truck_event_id": 116,
+      "truck_id": 236
+    },
+    {
+      "load_event_id": 219,
+      "load_id": 10068,
+      "truck_event_id": 40,
+      "truck_id": 152
+    },
+    {
+      "load_event_id": 341,
+      "load_id": 40010,
+      "truck_event_id": 22,
+      "truck_id": 112
+    },
+    {
+      "load_event_id": 51,
+      "load_id": 10263,
+      "truck_event_id": 25,
+      "truck_id": 176
+    },
+    {
+      "load_event_id": 231,
+      "load_id": 10370,
+      "truck_event_id": 176,
+      "truck_id": 232
+    },
+    {
+      "load_event_id": 82,
+      "load_id": 10502,
+      "truck_event_id": 102,
+      "truck_id": 116
+    },
+    {
+      "load_event_id": 275,
+      "load_id": 10948,
+      "truck_event_id": 112,
+      "truck_id": 126
+    },
+    {
+      "load_event_id": 285,
+      "load_id": 40012,
+      "truck_event_id": 398,
+      "truck_id": 349
+    },
+    {
+      "load_event_id": 91,
+      "load_id": 10146,
+      "truck_event_id": 442,
+      "truck_id": 192
+    },
+    {
+      "load_event_id": 138,
+      "load_id": 11025,
+      "truck_event_id": 16,
+      "truck_id": 134
+    },
+    {
+      "load_event_id": 298,
+      "load_id": 10423,
+      "truck_event_id": 187,
+      "truck_id": 281
+    },
+    {
+      "load_event_id": 98,
+      "load_id": 10374,
+      "truck_event_id": 299,
+      "truck_id": 176
+    },
+    {
+      "load_event_id": 150,
+      "load_id": 10019,
+      "truck_event_id": 75,
+      "truck_id": 223
+    },
+    {
+      "load_event_id": 240,
+      "load_id": 10166,
+      "truck_event_id": 331,
+      "truck_id": 364
+    },
+    {
+      "load_event_id": 216,
+      "load_id": 10697,
+      "truck_event_id": 449,
+      "truck_id": 378
+    },
+    {
+      "load_event_id": 85,
+      "load_id": 10204,
+      "truck_event_id": 170,
+      "truck_id": 141
+    },
+    {
+      "load_event_id": 193,
+      "load_id": 10261,
+      "truck_event_id": 330,
+      "truck_id": 303
+    },
+    {
+      "load_event_id": 164,
+      "load_id": 10685,
+      "truck_event_id": 94,
+      "truck_id": 251
+    },
+    {
+      "load_event_id": 199,
+      "load_id": 10816,
+      "truck_event_id": 377,
+      "truck_id": 238
+    },
+    {
+      "load_event_id": 399,
+      "load_id": 10006,
+      "truck_event_id": 358,
+      "truck_id": 278
+    },
+    {
+      "load_event_id": 99,
+      "load_id": 11032,
+      "truck_event_id": 416,
+      "truck_id": 311
+    },
+    {
+      "load_event_id": 333,
+      "load_id": 10770,
+      "truck_event_id": 175,
+      "truck_id": 148
+    },
+    {
+      "load_event_id": 5,
+      "load_id": 10736,
+      "truck_event_id": 44,
+      "truck_id": 137
+    },
+    {
+      "load_event_id": 402,
+      "load_id": 10067,
+      "truck_event_id": 77,
+      "truck_id": 157
+    },
+    {
+      "load_event_id": 296,
+      "load_id": 10464,
+      "truck_event_id": 327,
+      "truck_id": 362
+    },
+    {
+      "load_event_id": 410,
+      "load_id": 10647,
+      "truck_event_id": 143,
+      "truck_id": 180
+    },
+    {
+      "load_event_id": 406,
+      "load_id": 10633,
+      "truck_event_id": 349,
+      "truck_id": 370
+    },
+    {
+      "load_event_id": 4,
+      "load_id": 10132,
+      "truck_event_id": 459,
+      "truck_id": 119
+    },
+    {
+      "load_event_id": 201,
+      "load_id": 10025,
+      "truck_event_id": 78,
+      "truck_id": 209
+    },
+    {
+      "load_event_id": 329,
+      "load_id": 10116,
+      "truck_event_id": 290,
+      "truck_id": 351
+    },
+    {
+      "load_event_id": 437,
+      "load_id": 40023,
+      "truck_event_id": 441,
+      "truck_id": 372
+    },
+    {
+      "load_event_id": 426,
+      "load_id": 10350,
+      "truck_event_id": 120,
+      "truck_id": 240
+    },
+    {
+      "load_event_id": 293,
+      "load_id": 10037,
+      "truck_event_id": 307,
+      "truck_id": 169
+    },
+    {
+      "load_event_id": 203,
+      "load_id": 40005,
+      "truck_event_id": 309,
+      "truck_id": 203
+    },
+    {
+      "load_event_id": 191,
+      "load_id": 10090,
+      "truck_event_id": 182,
+      "truck_id": 271
+    },
+    {
+      "load_event_id": 243,
+      "load_id": 10171,
+      "truck_event_id": 287,
+      "truck_id": 278
+    },
+    {
+      "load_event_id": 340,
+      "load_id": 10523,
+      "truck_event_id": 20,
+      "truck_id": 147
+    },
+    {
+      "load_event_id": 166,
+      "load_id": 10388,
+      "truck_event_id": 221,
+      "truck_id": 132
+    },
+    {
+      "load_event_id": 429,
+      "load_id": 40022,
+      "truck_event_id": 63,
+      "truck_id": 180
+    },
+    {
+      "load_event_id": 128,
+      "load_id": 10972,
+      "truck_event_id": 256,
+      "truck_id": 135
+    },
+    {
+      "load_event_id": 38,
+      "load_id": 10583,
+      "truck_event_id": 308,
+      "truck_id": 102
+    },
+    {
+      "load_event_id": 279,
+      "load_id": 10308,
+      "truck_event_id": 31,
+      "truck_id": 185
+    },
+    {
+      "load_event_id": 238,
+      "load_id": 10065,
+      "truck_event_id": 297,
+      "truck_id": 200
+    },
+    {
+      "load_event_id": 392,
+      "load_id": 10820,
+      "truck_event_id": 338,
+      "truck_id": 362
+    },
+    {
+      "load_event_id": 53,
+      "load_id": 10693,
+      "truck_event_id": 274,
+      "truck_id": 232
+    },
+    {
+      "load_event_id": 90,
+      "load_id": 10944,
+      "truck_event_id": 335,
+      "truck_id": 278
+    },
+    {
+      "load_event_id": 319,
+      "load_id": 10113,
+      "truck_event_id": 418,
+      "truck_id": 249
+    },
+    {
+      "load_event_id": 81,
+      "load_id": 11035,
+      "truck_event_id": 321,
+      "truck_id": 112
+    },
+    {
+      "load_event_id": 305,
+      "load_id": 10044,
+      "truck_event_id": 147,
+      "truck_id": 178
+    },
+    {
+      "load_event_id": 200,
+      "load_id": 10567,
+      "truck_event_id": 93,
+      "truck_id": 164
+    },
+    {
+      "load_event_id": 73,
+      "load_id": 10235,
+      "truck_event_id": 57,
+      "truck_id": 111
+    },
+    {
+      "load_event_id": 52,
+      "load_id": 10781,
+      "truck_event_id": 195,
+      "truck_id": 271
+    },
+    {
+      "load_event_id": 252,
+      "load_id": 10508,
+      "truck_event_id": 404,
+      "truck_id": 164
+    },
+    {
+      "load_event_id": 10,
+      "load_id": 10262,
+      "truck_event_id": 194,
+      "truck_id": 111
+    },
+    {
+      "load_event_id": 289,
+      "load_id": 10134,
+      "truck_event_id": 283,
+      "truck_id": 179
+    },
+    {
+      "load_event_id": 197,
+      "load_id": 10881,
+      "truck_event_id": 42,
+      "truck_id": 201
+    },
+    {
+      "load_event_id": 254,
+      "load_id": 10390,
+      "truck_event_id": 33,
+      "truck_id": 185
+    },
+    {
+      "load_event_id": 146,
+      "load_id": 10086,
+      "truck_event_id": 273,
+      "truck_id": 142
+    },
+    {
+      "load_event_id": 210,
+      "load_id": 10060,
+      "truck_event_id": 451,
+      "truck_id": 150
+    },
+    {
+      "load_event_id": 11,
+      "load_id": 10651,
+      "truck_event_id": 129,
+      "truck_id": 129
+    },
+    {
+      "load_event_id": 286,
+      "load_id": 10030,
+      "truck_event_id": 312,
+      "truck_id": 129
+    },
+    {
+      "load_event_id": 67,
+      "load_id": 10809,
+      "truck_event_id": 244,
+      "truck_id": 200
+    },
+    {
+      "load_event_id": 421,
+      "load_id": 10251,
+      "truck_event_id": 103,
+      "truck_id": 141
+    },
+    {
+      "load_event_id": 1,
+      "load_id": 10256,
+      "truck_event_id": 211,
+      "truck_id": 127
+    },
+    {
+      "load_event_id": 6,
+      "load_id": 10951,
+      "truck_event_id": 214,
+      "truck_id": 281
+    },
+    {
+      "load_event_id": 134,
+      "load_id": 11055,
+      "truck_event_id": 236,
+      "truck_id": 278
+    },
+    {
+      "load_event_id": 123,
+      "load_id": 10734,
+      "truck_event_id": 251,
+      "truck_id": 241
+    },
+    {
+      "load_event_id": 80,
+      "load_id": 10811,
+      "truck_event_id": 180,
+      "truck_id": 279
+    },
+    {
+      "load_event_id": 315,
+      "load_id": 10056,
+      "truck_event_id": 213,
+      "truck_id": 299
+    },
+    {
+      "load_event_id": 192,
+      "load_id": 10681,
+      "truck_event_id": 276,
+      "truck_id": 139
+    },
+    {
+      "load_event_id": 314,
+      "load_id": 10863,
+      "truck_event_id": 228,
+      "truck_id": 277
+    },
+    {
+      "load_event_id": 241,
+      "load_id": 10688,
+      "truck_event_id": 152,
+      "truck_id": 281
+    },
+    {
+      "load_event_id": 343,
+      "load_id": 40019,
+      "truck_event_id": 409,
+      "truck_id": 190
+    },
+    {
+      "load_event_id": 83,
+      "load_id": 10268,
+      "truck_event_id": 430,
+      "truck_id": 305
+    },
+    {
+      "load_event_id": 223,
+      "load_id": 11030,
+      "truck_event_id": 198,
+      "truck_id": 217
+    },
+    {
+      "load_event_id": 433,
+      "load_id": 10355,
+      "truck_event_id": 19,
+      "truck_id": 106
+    },
+    {
+      "load_event_id": 366,
+      "load_id": 10005,
+      "truck_event_id": 369,
+      "truck_id": 208
+    },
+    {
+      "load_event_id": 188,
+      "load_id": 10631,
+      "truck_event_id": 394,
+      "truck_id": 104
+    },
+    {
+      "load_event_id": 145,
+      "load_id": 10528,
+      "truck_event_id": 417,
+      "truck_id": 325
+    },
+    {
+      "load_event_id": 452,
+      "load_id": 10700,
+      "truck_event_id": 118,
+      "truck_id": 228
+    },
+    {
+      "load_event_id": 68,
+      "load_id": 10876,
+      "truck_event_id": 209,
+      "truck_id": 323
+    },
+    {
+      "load_event_id": 218,
+      "load_id": 10608,
+      "truck_event_id": 149,
+      "truck_id": 274
+    },
+    {
+      "load_event_id": 126,
+      "load_id": 10275,
+      "truck_event_id": 89,
+      "truck_id": 141
+    },
+    {
+      "load_event_id": 342,
+      "load_id": 10849,
+      "truck_event_id": 62,
+      "truck_id": 189
+    },
+    {
+      "load_event_id": 54,
+      "load_id": 10064,
+      "truck_event_id": 232,
+      "truck_id": 249
+    },
+    {
+      "load_event_id": 13,
+      "load_id": 10426,
+      "truck_event_id": 400,
+      "truck_id": 152
+    },
+    {
+      "load_event_id": 122,
+      "load_id": 10257,
+      "truck_event_id": 440,
+      "truck_id": 132
+    },
+    {
+      "load_event_id": 127,
+      "load_id": 10358,
+      "truck_event_id": 237,
+      "truck_id": 241
+    },
+    {
+      "load_event_id": 171,
+      "load_id": 10503,
+      "truck_event_id": 257,
+      "truck_id": 332
+    },
+    {
+      "load_event_id": 428,
+      "load_id": 10711,
+      "truck_event_id": 224,
+      "truck_id": 127
+    },
+    {
+      "load_event_id": 250,
+      "load_id": 10705,
+      "truck_event_id": 159,
+      "truck_id": 251
+    },
+    {
+      "load_event_id": 12,
+      "load_id": 11010,
+      "truck_event_id": 455,
+      "truck_id": 229
+    },
+    {
+      "load_event_id": 259,
+      "load_id": 10072,
+      "truck_event_id": 114,
+      "truck_id": 182
+    },
+    {
+      "load_event_id": 303,
+      "load_id": 10769,
+      "truck_event_id": 246,
+      "truck_id": 111
+    },
+    {
+      "load_event_id": 217,
+      "load_id": 10020,
+      "truck_event_id": 49,
+      "truck_id": 132
+    },
+    {
+      "load_event_id": 345,
+      "load_id": 10238,
+      "truck_event_id": 361,
+      "truck_id": 226
+    },
+    {
+      "load_event_id": 270,
+      "load_id": 40002,
+      "truck_event_id": 288,
+      "truck_id": 197
+    },
+    {
+      "load_event_id": 28,
+      "load_id": 10161,
+      "truck_event_id": 113,
+      "truck_id": 121
+    },
+    {
+      "load_event_id": 456,
+      "load_id": 10121,
+      "truck_event_id": 351,
+      "truck_id": 200
+    },
+    {
+      "load_event_id": 383,
+      "load_id": 10027,
+      "truck_event_id": 36,
+      "truck_id": 141
+    },
+    {
+      "load_event_id": 387,
+      "load_id": 10814,
+      "truck_event_id": 121,
+      "truck_id": 267
+    },
+    {
+      "load_event_id": 320,
+      "load_id": 10319,
+      "truck_event_id": 15,
+      "truck_id": 101
+    },
+    {
+      "load_event_id": 132,
+      "load_id": 10751,
+      "truck_event_id": 282,
+      "truck_id": 342
+    },
+    {
+      "load_event_id": 255,
+      "load_id": 10939,
+      "truck_event_id": 140,
+      "truck_id": 147
+    },
+    {
+      "load_event_id": 370,
+      "load_id": 10991,
+      "truck_event_id": 336,
+      "truck_id": 327
+    },
+    {
+      "load_event_id": 74,
+      "load_id": 11017,
+      "truck_event_id": 355,
+      "truck_id": 353
+    },
+    {
+      "load_event_id": 190,
+      "load_id": 10571,
+      "truck_event_id": 381,
+      "truck_id": 200
+    },
+    {
+      "load_event_id": 401,
+      "load_id": 10691,
+      "truck_event_id": 27,
+      "truck_id": 169
+    },
+    {
+      "load_event_id": 185,
+      "load_id": 10197,
+      "truck_event_id": 50,
+      "truck_id": 201
+    },
+    {
+      "load_event_id": 189,
+      "load_id": 10214,
+      "truck_event_id": 66,
+      "truck_id": 205
+    },
+    {
+      "load_event_id": 157,
+      "load_id": 10295,
+      "truck_event_id": 35,
+      "truck_id": 185
+    },
+    {
+      "load_event_id": 55,
+      "load_id": 10795,
+      "truck_event_id": 306,
+      "truck_id": 333
+    },
+    {
+      "load_event_id": 365,
+      "load_id": 10062,
+      "truck_event_id": 17,
+      "truck_id": 121
+    },
+    {
+      "load_event_id": 344,
+      "load_id": 10211,
+      "truck_event_id": 316,
+      "truck_id": 332
+    },
+    {
+      "load_event_id": 225,
+      "load_id": 10144,
+      "truck_event_id": 420,
+      "truck_id": 235
+    },
+    {
+      "load_event_id": 371,
+      "load_id": 40018,
+      "truck_event_id": 318,
+      "truck_id": 306
+    },
+    {
+      "load_event_id": 3,
+      "load_id": 10182,
+      "truck_event_id": 375,
+      "truck_id": 157
+    },
+    {
+      "load_event_id": 130,
+      "load_id": 40006,
+      "truck_event_id": 233,
+      "truck_id": 123
+    },
+    {
+      "load_event_id": 227,
+      "load_id": 10032,
+      "truck_event_id": 413,
+      "truck_id": 286
+    },
+    {
+      "load_event_id": 100,
+      "load_id": 10272,
+      "truck_event_id": 431,
+      "truck_id": 209
+    },
+    {
+      "load_event_id": 131,
+      "load_id": 10468,
+      "truck_event_id": 64,
+      "truck_id": 106
+    },
+    {
+      "load_event_id": 263,
+      "load_id": 10004,
+      "truck_event_id": 21,
+      "truck_id": 159
+    },
+    {
+      "load_event_id": 196,
+      "load_id": 10492,
+      "truck_event_id": 204,
+      "truck_id": 183
+    },
+    {
+      "load_event_id": 353,
+      "load_id": 10717,
+      "truck_event_id": 384,
+      "truck_id": 346
+    },
+    {
+      "load_event_id": 156,
+      "load_id": 10927,
+      "truck_event_id": 326,
+      "truck_id": 348
+    },
+    {
+      "load_event_id": 108,
+      "load_id": 10457,
+      "truck_event_id": 43,
+      "truck_id": 189
+    },
+    {
+      "load_event_id": 265,
+      "load_id": 10834,
+      "truck_event_id": 362,
+      "truck_id": 366
+    },
+    {
+      "load_event_id": 220,
+      "load_id": 10252,
+      "truck_event_id": 432,
+      "truck_id": 157
+    },
+    {
+      "load_event_id": 357,
+      "load_id": 10320,
+      "truck_event_id": 454,
+      "truck_id": 337
+    },
+    {
+      "load_event_id": 208,
+      "load_id": 10729,
+      "truck_event_id": 450,
+      "truck_id": 318
+    },
+    {
+      "load_event_id": 324,
+      "load_id": 10329,
+      "truck_event_id": 460,
+      "truck_id": 104
+    },
+    {
+      "load_event_id": 215,
+      "load_id": 10397,
+      "truck_event_id": 205,
+      "truck_id": 327
+    },
+    {
+      "load_event_id": 310,
+      "load_id": 10274,
+      "truck_event_id": 388,
+      "truck_id": 261
+    },
+    {
+      "load_event_id": 419,
+      "load_id": 10119,
+      "truck_event_id": 385,
+      "truck_id": 228
+    },
+    {
+      "load_event_id": 393,
+      "load_id": 10285,
+      "truck_event_id": 88,
+      "truck_id": 209
+    }
+  ]
