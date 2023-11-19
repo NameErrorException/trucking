@@ -53,7 +53,7 @@ def process_event(event):
 
     elif event_type == "Truck":
         truck_id = event['truckId']
-        event_id = event['seq']  # Assuming 'seq' is a unique event ID
+        event_id = event['seq']
         equip_type = event['equipType']
         truck_key = (truck_id, event_id)
         trucks[truck_key] = {
@@ -121,7 +121,7 @@ def perform_batch_matching(events, batch_number):
             truck_key = trucks_list[truck_idx]
             load = loads_list[load_idx]
             if truck_key in unassigned_trucks:
-                print(f"Batch {batch_number} Assignment: Truck {truck_key[0]} (Event {truck_key[1]}) assigned to Load {load['loadId']}")
+                print(f"Batch {batch_number} Assignment: Truck {truck_key[0]} (Event {truck_key[1]}) assigned to Load {load['loadId']} (Event {load['seq']})")
                 unassigned_trucks.remove(truck_key)
                 remove_assigned_load(load)
                 matched_load_ids.add(load['loadId'])
@@ -130,7 +130,12 @@ def perform_batch_matching(events, batch_number):
                 # Add the cost of this assignment to the total cost
                 total_cost += cost_matrix[truck_idx, load_idx]
 
-    print(f"Total Cost for Batch {batch_number}: {total_cost}")
+    if len(matched_truck_keys) > 0:
+        print(f"Total Cost for Batch {batch_number}: {total_cost}")
+        average_cost = total_cost / len(matched_truck_keys)
+        print(f"Average Cost for Batch {batch_number}: {average_cost}")
+    else:
+        print(f"No assignments made in Batch {batch_number}")
 
     # Clear matched loads and trucks from events
     return [event for event in events if (event['type'] != 'Load' or event['loadId'] not in matched_load_ids) 
@@ -169,8 +174,7 @@ def end_of_day_matching():
 
 def driver_decision(truck_id, load):
     # Implement the logic for driver's decision to accept or reject the load.
-    # This could be user input, a random decision, or based on specific criteria.
-    # For example, return True to accept the job or False to reject it.
+    # There is no need to implement this function for the CodeJam as there is no enough data to support.
     # Placeholder implementation:
     return True  # Assuming the driver accepts the job
 
@@ -218,6 +222,7 @@ class MqttClient:
         self.start_time = None
         self.batch_number = 0
         self.processing = False
+    # For example, return True to accept the job or False to reject it.
         self.buffer = []
         self.event_queue = queue.Queue()
         self.processing_thread = None
@@ -231,6 +236,7 @@ class MqttClient:
         
     def start_processing(self):
         # Processing logic goes here
+    # For example, return True to accept the job or False to reject it.
         while True:
             events, batch_number, is_end_of_day = self.event_queue.get()
             if events is None:
