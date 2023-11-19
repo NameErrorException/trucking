@@ -7,17 +7,16 @@ import MapComponent from './MapAsset/mapComponent';
 export default function Home() {
   let navigate = useNavigate();
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("Truck"); // Default selected option
 
   const routeChange = () => {
-    let path = '/truck';
+    let path = `/${selectedOption.toLowerCase()}`;
     navigate(path);
   };
-  
+
   const toggleSearchBar = () => {
     setIsSearchBarOpen(!isSearchBarOpen);
   };
-  
-
 
   return (
     
@@ -58,12 +57,27 @@ export default function Home() {
             {/* Search Bar */}
             <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-400 bg-opacity-50 p-10 rounded-xl">
               <div className="container mx-auto flex flex-col items-center p-5">
-                {/* Add  search bar components here */}
+                {/* Search bar components */}
                 <input
                   type="text"
-                  placeholder="Truck Search..."
-                  className="w-full px-10 py-2 border rounded focus:outline-none focus:border-blue-500"
+                  placeholder={`${selectedOption} Search...`}
+                  className="w-full px-10 py-2 border rounded focus:outline-none focus:border-blue-500 mb-4"
                 />
+                <div className="flex justify-center space-x-4 mb-4">
+                  {/* Search Options */}
+                  <button
+                    className={`text-white rounded-2xl px-6 py-2 bg-slate-400 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105 ${selectedOption === 'Truck' ? 'bg-orange-300  text-gray-800' : ''}`}
+                    onClick={() => setSelectedOption('Truck')}
+                  >
+                    Truck
+                  </button>
+                  <button
+                    className={`text-white rounded-2xl px-6 py-2 bg-slate-400 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105 ${selectedOption === 'Load' ? 'bg-slate-400 text-gray-800' : ''}`}
+                    onClick={() => setSelectedOption('Load')}
+                  >
+                    Load
+                  </button>
+                </div>
                 <button
                   className="w-full text-white rounded-2xl bg-orange-300 py-2 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
                   onClick={routeChange}

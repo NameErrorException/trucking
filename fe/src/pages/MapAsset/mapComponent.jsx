@@ -13,7 +13,7 @@ const MapComponent = () => {
   const initMap = () => {
     mapRef.current = new window.google.maps.Map(document.getElementById("map"), {
       zoom: 7,
-      center: { lat: 41.85, lng: -87.65 },
+      center: { lat: 45.5, lng:-73.56 },
       styles: [
         { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
         { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
