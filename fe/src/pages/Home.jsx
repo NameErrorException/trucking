@@ -15,20 +15,23 @@ export default function Home() {
   const mapRef = useRef(null); // useRef to hold the map instance
 
 
+  const fetchData = () => {
+    fetch('http://127.0.0.1:5000/data')
+    .then(response => response.json())
+    .then(data => {
+      setTrucks(data.filter(item => item.type === 'Truck'));
+      setLoads(data.filter(item => item.type === 'Load'));
+    });
+  
+  fetch('http://127.0.0.1:5000/filtered')
+    .then(response => response.json())
+    .then(setAssignments);
+  }
 
   // Fetching data from the endpoints
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/data')
-      .then(response => response.json())
-      .then(data => {
-        setTrucks(data.filter(item => item.type === 'Truck'));
-        setLoads(data.filter(item => item.type === 'Load'));
-      });
-    
-    fetch('http://127.0.0.1:5000/filtered')
-      .then(response => response.json())
-      .then(setAssignments);
-
+  
+      fetchData();
     // Load Google Maps
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDPg2P5Z_oSGZMeQ273Q-35JWwr9IMrBi4&callback=initMap&v=weekly`;
@@ -41,8 +44,17 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetchData(); // Fetch data at regular intervals
+    }, 500); // Interval set to 1 minute (60000 ms)
+
+    return () => clearInterval(intervalId); // Clear interval on unmount
+  }, []);
+
   // Initialize Google Map
   const initMap = () => {
+    
     mapRef.current = new window.google.maps.Map(document.getElementById("map"), {
       zoom: 7,
       center: { lat: 41.85, lng: -87.65 },
@@ -159,10 +171,21 @@ export default function Home() {
         }
         const itemm = loads.find(l => l.loadId === truck.load_id);
         const itemmm = trucks.find(t => t.truckId === truck.truck_id);
-        new window.google.maps.Marker({
+        const marker = new window.google.maps.Marker({
           position: { lat: itemmm.positionLatitude, lng: itemmm.positionLongitude },
           map: mapRef.current,
           label: 'T'
+
+        });
+        const infoWindow = new window.google.maps.InfoWindow({
+          content: `<div>Truck ID: ${truck.truck_id}<br>Load ID: ${truck.load_id}</div>`,
+        });
+        marker.addListener("click", () => {
+          infoWindow.open({
+            anchor: marker,
+            map: mapRef.current,
+            shouldFocus: true,
+          });
         });
         const directionsRenderer = new window.google.maps.DirectionsRenderer();
         directionsRenderer.setMap(mapRef.current);
@@ -208,9 +231,15 @@ export default function Home() {
       position: { lat: itemmm.positionLatitude, lng: itemmm.positionLongitude },
       map: mapRef.current,
       label: 'T'});
+      const infoWindow = new window.google.maps.InfoWindow({
+        content: `<div>Truck ID: ${truck.truck_id}<br>Load ID: ${truck.load_id}</div>`,
+      });
       marker.addListener("click", () => {
-        map.setZoom(8);
-        map.setCenter(marker.getPosition());
+        infoWindow.open({
+          anchor: marker,
+          map: mapRef.current,
+          shouldFocus: true,
+        });
       });
     }
   };
