@@ -1,7 +1,11 @@
 import paho.mqtt.client as mqtt
-
+import matching
+import json
 class Data:
-# ...
+    
+    events = []
+    event_on = False
+    
     def __init__(self):
         self.client = mqtt.Client(client_id="NNE02", clean_session=True)
         self.client.username_pw_set("CodeJamUser", "123CodeJam")
@@ -15,10 +19,25 @@ class Data:
         self.client.subscribe("CodeJam", qos=1)
 
     def on_message(self, client, userdata, msg):
-        print(f"{msg.payload.decode()}")
-
-        # manipulate data here
-
+        try:
+            event = json.loads(msg.payload.decode())
+            # self.events.append(event)
+            
+            if event['type'] == 'Start':
+                self.event_on = True
+                self.events = []
+            elif event['type'] == 'End':
+                self.event_on = False
+            
+            if self.event_on:
+                self.events.append(event)
+                if len(self.events) >= 100:
+                    matching.main(self.events)
+                    self.events = []
+                   
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON: {e}")
+        
     def get_data_stream(self):
         self.client.connect("fortuitous-welder.cloudmqtt.com", 1883, 60)
         self.client.loop_forever()
