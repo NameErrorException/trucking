@@ -206,15 +206,18 @@ export default function Home() {
       map: mapRef.current,
       label: 'T'});}
   };
-
+  
   let navigate = useNavigate();
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Truck"); // Default selected option
   const [SearchInput,setSearchInput] = useState("");
-  // const SubmitPath = () => {
-  //   let path = `/search${selectedOption.toLowerCase()}` + `/${SearchInput}`;
-  //   navigate(path);
-  // };
+
+  const GoHome = () => {
+    navigate(`/`);
+  };
+  const GoRank = () => {
+    navigate(`/ranking`);
+  };
 
   const toggleSearchBar = () => {
     setIsSearchBarOpen(!isSearchBarOpen);
@@ -235,10 +238,10 @@ export default function Home() {
       <div><span className="ml-3 text-xl">123 LoadBoard</span></div>
       <div className="ml-32">
     <nav className="md:ml-auto md:mr-auto w-full flex flex-wrap items-center text-base justify-center">
-      <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> First Link </a>
-      <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Second Link </a>
-      <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Third Link </a>
-      <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Fourth Link </a>
+      <button className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onClick={GoHome}> HOME </button>
+      <button className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onClick={GoRank}> RANKING </button>
+      {/* <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Third Link </a>
+      <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Fourth Link </a> */}
     </nav>
     </div>
     <div className="absolute top-4 right-14 h-16 w-16 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
