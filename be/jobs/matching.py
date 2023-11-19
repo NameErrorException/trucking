@@ -290,7 +290,7 @@ class MqttClient:
             self.stop_processing()
             self.client.loop_stop()
 
-
+mqtt_client = MqttClient()
 
 def get_current_batch():
     global mqtt_client 
@@ -301,8 +301,7 @@ def get_matching_pairs():
     return matching_pairs
 
 def start_client():
-    #global mqtt_client
-    mqtt_client = MqttClient()
+    global mqtt_client
     mqtt_client.start()
 
 #start_client()
