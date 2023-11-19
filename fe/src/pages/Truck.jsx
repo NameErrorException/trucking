@@ -1,10 +1,22 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Truck() {
     
     let location = useLocation();
+    let navigate = useNavigate();
 
+
+    const GoHome = () => {
+      navigate(`/`);
+    };
+    const GoRank = () => {
+      navigate(`/ranking`);
+    };
+
+    
     let truckId = location.pathname.replace('/truck/', '')
     console.log("um so here we are!!")
     console.log(truckId)
@@ -20,10 +32,16 @@ export default function Truck() {
       <div><span className="ml-3 text-xl">123 LoadBoard</span></div>
       <div className="ml-32">
     <nav className="md:ml-auto md:mr-auto w-full flex flex-wrap items-center text-base justify-center">
-      <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> First Link </a>
-      <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Second Link </a>
-      <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Third Link </a>
-      <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Fourth Link </a>
+    <button class="relative inline-flex items-center justify-center p-0.5 ml-4 mb-0 me-0 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-slate-700 to-blue-700 group-hover:from-purple-600 group-hover:to-slate-500 hover:text-white dark:text-white" onClick={GoHome}>
+    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+    HOME
+    </span>
+    </button>
+    <button class="relative inline-flex items-center justify-center p-0.5 ml-4 mb-0 me-0 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-slate-700 to-blue-700 group-hover:from-purple-600 group-hover:to-slate-500 hover:text-white dark:text-white" onClick={GoRank}>
+    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+    RANK
+    </span>
+    </button>
     </nav>
     </div>
     <div className="absolute top-4 right-14 h-16 w-16">
