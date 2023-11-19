@@ -171,7 +171,7 @@ const calculateAndDisplayRoute = (load) => {
 
   return (
     <div>
-      <div id="map" style={{ height: '900px', width: '80%' }}></div>
+      <div id="map" style={{ height: '900px', width: '100%' }}></div>
     </div>
   );
 };
