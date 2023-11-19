@@ -1,22 +1,58 @@
-import React, { useState, useEffect, useRef } from 'react';
-
+import React, {useRef, useState, useEffect } from 'react';
 
 
 const MapComponent = () => {
-  const [users, setUsers] = useState([]);
-  const [trucks, setTrucks] = useState({});
-  const mapRef = useRef(null); // useRef to hold the map instance
+  // State for storing data
+  const [trucks, setTrucks] = useState([]);
+  const [loads, setLoads] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  const [inputTruckId, setInputTruckId] = useState('');
+
+
 
 
   const directionsServiceRef = useRef(null);
   const directionsRendererRef = useRef(null);
+  const mapRef = useRef(null); // useRef to hold the map instance
 
 
 
+
+
+
+  // Fetching data from the endpoints
+  useEffect(() => {
+    fetch('http://127.0.0.1:5000/data')
+      .then(response => response.json())
+      .then(data => {
+        setTrucks(data.filter(item => item.type === 'Truck'));
+        setLoads(data.filter(item => item.type === 'Load'));
+      });
+   
+    fetch('http://127.0.0.1:5000/filtered')
+      .then(response => response.json())
+      .then(setAssignments);
+
+
+    // Load Google Maps
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDPg2P5Z_oSGZMeQ273Q-35JWwr9IMrBi4&callback=initMap&v=weekly`;
+    script.defer = true;
+    window.initMap = initMap;
+    document.head.appendChild(script);
+
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
+
+  // Initialize Google Map
   const initMap = () => {
     mapRef.current = new window.google.maps.Map(document.getElementById("map"), {
       zoom: 7,
-      center: { lat: 45.5, lng:-73.56 },
+      center: { lat: 41.85, lng: -87.65 },
       styles: [
         { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
         { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -101,135 +137,101 @@ const MapComponent = () => {
     directionsServiceRef.current = new window.google.maps.DirectionsService();
     directionsRendererRef.current = new window.google.maps.DirectionsRenderer({ suppressMarkers: true, polylineOptions: { strokeColor: '#5cb85c' } });
     directionsRendererRef.current.setMap(mapRef.current);
-    fetchUserData(); // Fetch user data after map initialization
   };
 
-  const fetchUserData = () => {
-    Promise.all([
-      fetch("http://127.0.0.1:5000/data").then(response => response.json()),
-      fetch("http://127.0.0.1:5000/filtered").then(response => response.json())
-    ])
-    .then(([data, filteredData]) => {
-      const newTrucks = {};
 
-      fetchedData.forEach(item => {
-        if (item.type === "Truck") {
-          newTrucks[item.id] = { ...item, loads: [] };
-        }
-      });
-
-      filteredData.forEach(filteredItem => {
-        const load_id = filteredItem.load_id;
-        const truck_id = filteredItem.truck_id;
-        const load = fetchedData.find(item => item.type === "Load" && item.loadId === load_id);
-        const truck = newTrucks[truck_id];
-
-        if (load && truck) {
-          truck.loads.push(load_id);
-          load.assigned = truck_id; // Add new attribute 'assigned' to the load
-        }
-      });
-        setTrucks(newTrucks);
-      })
-      .catch(error => console.error('Error fetching user data:', error));
+  // Handle input change
+  const handleInputChange = (e) => {
+    setInputTruckId(e.target.value);
   };
-const calculateAndDisplayRoute = (load) => {
-  const directionsRenderer = new window.google.maps.DirectionsRenderer();
-  directionsRenderer.setMap(mapRef.current); // Set the map for the DirectionsRenderer
 
-  const origin = new window.google.maps.LatLng(load.originLatitude, load.originLongitude);
-  const destination = new window.google.maps.LatLng(load.destinationLatitude, load.destinationLongitude);
 
-  directionsServiceRef.current.route({
-    origin: origin,
-    destination: destination,
-    travelMode: window.google.maps.TravelMode.DRIVING,
-  }, (response, status) => {
-    if (status === 'OK') {
-      directionsRenderer.setDirections(response); // Set the directions for the DirectionsRenderer
-    } else {
-      console.error('Directions request failed due to ' + status);
+  // Handle form submission
+      const handleSubmit = (e) => {
+        e.preventDefault();
+
+
+        if (/^\d{5}$/.test(inputTruckId)) {
+          // Search for Load
+          const load = assignments.find(l => l.load_id === parseInt(inputTruckId))
+          // const load = loads.find(l => l.loadId === parseInt(inputTruckId));
+          if (!load) {
+            alert('Load not found');
+            return;
+          }
+     
+          displayLoadRoute(load);
+        } else {
+        const truck = assignments.find(t => t.truck_id === parseInt(inputTruckId));
+        if (!truck) {
+          alert('Truck not found');
+          return;
+        }
+        const itemm = loads.find(l => l.loadId === truck.load_id);
+        const itemmm = trucks.find(t => t.truckId === truck.truck_id);
+        new window.google.maps.Marker({
+          position: { lat: itemmm.positionLatitude, lng: itemmm.positionLongitude },
+          map: mapRef.current,
+          label: 'T'
+        });
+        const origin = new window.google.maps.LatLng(itemm.originLatitude, itemm.originLongitude);
+        const destination = new window.google.maps.LatLng(itemm.destinationLatitude, itemm.destinationLongitude);
+        directionsServiceRef.current.route({
+          origin: origin,
+          destination: destination,
+          travelMode: window.google.maps.TravelMode.DRIVING,
+        }, (response, status) => {
+          if (status === 'OK') {
+            directionsRenderer.setDirections(response); // Set the directions for the DirectionsRenderer
+          } else {
+            console.error('Directions request failed due to ' + status);
+          }
+        });
+
+
     }
-  });
-};
+        // Logic to find the truck, its assignments, and display on the map
+  };
+  const displayLoadRoute = (load) => {
+    const directionsRenderer = new window.google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(mapRef.current);
+// Set the map for the DirectionsRenderer
+    const itemm = loads.find(l => l.loadId === load.load_id)
+    if(itemm){console.log(itemm);
+    const origin = new window.google.maps.LatLng(itemm.originLatitude, itemm.originLongitude);
+    const destination = new window.google.maps.LatLng(itemm.destinationLatitude, itemm.destinationLongitude);
+    directionsServiceRef.current.route({
+      origin: origin,
+      destination: destination,
+      travelMode: window.google.maps.TravelMode.DRIVING,
+    }, (response, status) => {
+      if (status === 'OK') {
+        directionsRenderer.setDirections(response); // Set the directions for the DirectionsRenderer
+      } else {
+        console.error('Directions request failed due to ' + status);
+      }
+    });}
+    const itemmm = trucks.find(t => t.truckId === load.truck_id)
+    if(itemmm){new window.google.maps.Marker({
+      position: { lat: itemmm.positionLatitude, lng: itemmm.positionLongitude },
+      map: mapRef.current,
+      label: 'T'});}
+  };
 
-  
-  useEffect(() => {
-    // const initMap = () => {
-    //   const directionsService = new google.maps.DirectionsService();
-    //   const directionsRenderer = new google.maps.DirectionsRenderer();
-    //   const map = new google.maps.Map(document.getElementById("map"), {
-    //     zoom: 7,
-    //     center: { lat: 41.85, lng: -87.65 },
-    //   });
-
-    //   directionsRenderer.setMap(map);
-    //   // If you have a setOriginFromJson function, call it here
-    // };
-
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDPg2P5Z_oSGZMeQ273Q-35JWwr9IMrBi4&callback=initMap&v=weekly`;
-    script.defer = true;
-    document.head.appendChild(script);
-    window.initMap = initMap; // Assign initMap to window object
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
 
   return (
     <div>
+      <form onSubmit={handleSubmit}>
+        <input type="number" value={inputTruckId} onChange={handleInputChange} />
+        <button type="submit">Submit</button>
+      </form>
       <div id="map" style={{ height: '900px', width: '100%' }}></div>
     </div>
   );
 };
 
+
 export default MapComponent;
 
 
 
-const displayRoutesForTruck = (truckId) => {
-  const truck = trucks[truckId];
-  if (!truck) {
-    console.error('Truck not found');
-    return;
-  }
-
-  const directionsService = new window.google.maps.DirectionsService();
-  const directionsRenderer = new window.google.maps.DirectionsRenderer();
-  directionsRenderer.setMap(mapRef.current);
-
-  let lastDestination = { lat: truck.positionLatitude, lng: truck.positionLongitude }; // Starting point is the truck's current location
-
-  truck.loads.forEach(loadId => {
-    const load = data.find(item => item.id === loadId && item.type === "Load");
-    if (load) {
-      const loadOrigin = new window.google.maps.LatLng(load.originLatitude, load.originLongitude);
-      const loadDestination = new window.google.maps.LatLng(load.destinationLatitude, load.destinationLongitude);
-
-      // Route from last destination to load's origin
-      plotRoute(directionsService, directionsRenderer, lastDestination, loadOrigin);
-
-      // Route from load's origin to load's destination
-      plotRoute(directionsService, directionsRenderer, loadOrigin, loadDestination);
-
-      lastDestination = loadDestination; // Update last destination to current load's destination
-    }
-  });
-};
-
-const plotRoute = (directionsService, directionsRenderer, start, end) => {
-  directionsService.route({
-    origin: start,
-    destination: end,
-    travelMode: window.google.maps.TravelMode.DRIVING
-  }, (response, status) => {
-    if (status === 'OK') {
-      directionsRenderer.setDirections(response);
-    } else {
-      console.error('Directions request failed due to ' + status);
-    }
-  });
-};

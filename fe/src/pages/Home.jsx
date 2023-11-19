@@ -1,21 +1,226 @@
-import React, { useEffect, useState } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom';
-import GoogleMap from "./FullPageMap"
-import MapComponent from './MapAsset/mapComponent';
+
 
 
 export default function Home() {
+  const [trucks, setTrucks] = useState([]);
+  const [loads, setLoads] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  const [inputTruckId, setInputTruckId] = useState('');
+  
+
+  const directionsServiceRef = useRef(null);
+  const directionsRendererRef = useRef(null);
+  const mapRef = useRef(null); // useRef to hold the map instance
+
+
+
+  // Fetching data from the endpoints
+  useEffect(() => {
+    fetch('http://127.0.0.1:5000/data')
+      .then(response => response.json())
+      .then(data => {
+        setTrucks(data.filter(item => item.type === 'Truck'));
+        setLoads(data.filter(item => item.type === 'Load'));
+      });
+    
+    fetch('http://127.0.0.1:5000/filtered')
+      .then(response => response.json())
+      .then(setAssignments);
+
+    // Load Google Maps
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDPg2P5Z_oSGZMeQ273Q-35JWwr9IMrBi4&callback=initMap&v=weekly`;
+    script.defer = true;
+    window.initMap = initMap;
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
+  // Initialize Google Map
+  const initMap = () => {
+    mapRef.current = new window.google.maps.Map(document.getElementById("map"), {
+      zoom: 7,
+      center: { lat: 41.85, lng: -87.65 },
+      styles: [
+        { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+        { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+        { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+        {
+          featureType: "administrative.locality",
+          elementType: "labels.text.fill",
+          stylers: [{ color: "#d59563" }],
+        },
+        {
+          featureType: "poi",
+          elementType: "labels.text.fill",
+          stylers: [{ color: "#d59563" }],
+        },
+        {
+          featureType: "poi.park",
+          elementType: "geometry",
+          stylers: [{ color: "#263c3f" }],
+        },
+        {
+          featureType: "poi.park",
+          elementType: "labels.text.fill",
+          stylers: [{ color: "#6b9a76" }],
+        },
+        {
+          featureType: "road",
+          elementType: "geometry",
+          stylers: [{ color: "#38414e" }],
+        },
+        {
+          featureType: "road",
+          elementType: "geometry.stroke",
+          stylers: [{ color: "#212a37" }],
+        },
+        {
+          featureType: "road",
+          elementType: "labels.text.fill",
+          stylers: [{ color: "#9ca5b3" }],
+        },
+        {
+          featureType: "road.highway",
+          elementType: "geometry",
+          stylers: [{ color: "#746855" }],
+        },
+        {
+          featureType: "road.highway",
+          elementType: "geometry.stroke",
+          stylers: [{ color: "#1f2835" }],
+        },
+        {
+          featureType: "road.highway",
+          elementType: "labels.text.fill",
+          stylers: [{ color: "#f3d19c" }],
+        },
+        {
+          featureType: "transit",
+          elementType: "geometry",
+          stylers: [{ color: "#2f3948" }],
+        },
+        {
+          featureType: "transit.station",
+          elementType: "labels.text.fill",
+          stylers: [{ color: "#d59563" }],
+        },
+        {
+          featureType: "water",
+          elementType: "geometry",
+          stylers: [{ color: "#17263c" }],
+        },
+        {
+          featureType: "water",
+          elementType: "labels.text.fill",
+          stylers: [{ color: "#515c6d" }],
+        },
+        {
+          featureType: "water",
+          elementType: "labels.text.stroke",
+          stylers: [{ color: "#17263c" }],
+        },
+      ],  
+    });
+    directionsServiceRef.current = new window.google.maps.DirectionsService();
+    directionsRendererRef.current = new window.google.maps.DirectionsRenderer({ suppressMarkers: true, polylineOptions: { strokeColor: '#5cb85c' } });
+    directionsRendererRef.current.setMap(mapRef.current);
+  };
+
+  // Handle input change
+  const handleInputChange = (e) => {
+    setInputTruckId(e.target.value);
+  };
+
+
+  // Handle form submission
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (/^\d{5}$/.test(inputTruckId)) {
+          // Search for Load
+          const load = assignments.find(l => l.load_id === parseInt(inputTruckId))
+          // const load = loads.find(l => l.loadId === parseInt(inputTruckId));
+          if (!load) {
+            alert('Load not found');
+            return;
+          }
+      
+          displayLoadRoute(load);
+        } else {
+        const truck = assignments.find(t => t.truck_id === parseInt(inputTruckId));
+        if (!truck) {
+          alert('Truck not found');
+          return;
+        }
+        const itemm = loads.find(l => l.loadId === truck.load_id);
+        const itemmm = trucks.find(t => t.truckId === truck.truck_id);
+        new window.google.maps.Marker({
+          position: { lat: itemmm.positionLatitude, lng: itemmm.positionLongitude },
+          map: mapRef.current,
+          label: 'T'
+        });
+        const origin = new window.google.maps.LatLng(itemm.originLatitude, itemm.originLongitude);
+        const destination = new window.google.maps.LatLng(itemm.destinationLatitude, itemm.destinationLongitude);
+        directionsServiceRef.current.route({
+          origin: origin,
+          destination: destination,
+          travelMode: window.google.maps.TravelMode.DRIVING,
+        }, (response, status) => {
+          if (status === 'OK') {
+            directionsRenderer.setDirections(response); // Set the directions for the DirectionsRenderer
+          } else {
+            console.error('Directions request failed due to ' + status);
+          }
+        });
+
+    }
+        // Logic to find the truck, its assignments, and display on the map
+  };
+  const displayLoadRoute = (load) => {
+    const directionsRenderer = new window.google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(mapRef.current);
+// Set the map for the DirectionsRenderer
+    const itemm = loads.find(l => l.loadId === load.load_id)
+    if(itemm){console.log(itemm);
+    const origin = new window.google.maps.LatLng(itemm.originLatitude, itemm.originLongitude);
+    const destination = new window.google.maps.LatLng(itemm.destinationLatitude, itemm.destinationLongitude);
+    directionsServiceRef.current.route({
+      origin: origin,
+      destination: destination,
+      travelMode: window.google.maps.TravelMode.DRIVING,
+    }, (response, status) => {
+      if (status === 'OK') {
+        directionsRenderer.setDirections(response); // Set the directions for the DirectionsRenderer
+      } else {
+        console.error('Directions request failed due to ' + status);
+      }
+    });}
+    const itemmm = trucks.find(t => t.truckId === load.truck_id)
+    if(itemmm){new window.google.maps.Marker({
+      position: { lat: itemmm.positionLatitude, lng: itemmm.positionLongitude },
+      map: mapRef.current,
+      label: 'T'});}
+  };
+
   let navigate = useNavigate();
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Truck"); // Default selected option
-
-  const routeChange = () => {
-    let path = `/${selectedOption.toLowerCase()}`;
-    navigate(path);
-  };
+  const [SearchInput,setSearchInput] = useState("");
+  // const SubmitPath = () => {
+  //   let path = `/search${selectedOption.toLowerCase()}` + `/${SearchInput}`;
+  //   navigate(path);
+  // };
 
   const toggleSearchBar = () => {
     setIsSearchBarOpen(!isSearchBarOpen);
+  };
+  const handleSearchInput = (e) => {
+    setSearchInput(e.target.value);
   };
 
   return (
@@ -49,7 +254,13 @@ export default function Home() {
     </div>
     </header>
     <div className='flex-1 w-11/12 mx-auto p-4 text-lg bg-[#D6DBDf] h-full shadow-lg rounded-2xl after:clear-both after:block after:content-[""]'>
-      <MapComponent />
+    <div>
+      {/* <form onSubmit={handleSubmit}>
+        <input type="number" value={inputTruckId} onChange={handleInputChange} />
+        <button type="submit">Submit</button>
+      </form> */}
+      <div id="map" style={{ height: '900px', width: '100%' }}></div>
+    </div>
     </div>
 
     {isSearchBarOpen && (
@@ -60,8 +271,10 @@ export default function Home() {
                 {/* Search bar components */}
                 <input
                   type="text"
+                  value={inputTruckId}
                   placeholder={`${selectedOption} Search...`}
                   className="w-full px-10 py-2 border rounded focus:outline-none focus:border-blue-500 mb-4"
+                  onChange={handleInputChange}
                 />
                 <div className="flex justify-center space-x-4 mb-4">
                   {/* Search Options */}
@@ -80,7 +293,7 @@ export default function Home() {
                 </div>
                 <button
                   className="w-full text-white rounded-2xl bg-orange-300 py-2 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
-                  onClick={routeChange}
+                  onClick={handleSubmit}
                 >
                   Search
                 </button>
