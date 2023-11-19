@@ -91,7 +91,7 @@ matching_pairs = []
 
 def perform_batch_matching(events, batch_number):
     global matching_pairs
-    matching_pairs = []  # Reset for the new batch
+    #matching_pairs = []  # Reset for the new batch
 
     # Initialize the set for keeping track of matched load IDs
     matched_load_ids = set()
@@ -240,12 +240,14 @@ class MqttClient:
                 break  # Exit the processing after end of day
             
     def on_message(self, client, userdata, msg):
+        global matching_pairs
         try:
             event = json.loads(msg.payload.decode())
 
             if event['type'] == 'Start':
                 self.collect_events = True
                 self.event_buffer = []
+                matching_pairs = []
                 self.start_time = parse_timestamp(event['timestamp'])
                 if self.processing_thread and self.processing_thread.is_alive():
                     self.processing_thread.join()
@@ -260,7 +262,7 @@ class MqttClient:
             if self.collect_events:
                 current_time = parse_timestamp(event['timestamp'])
                 time_condition = current_time - self.start_time >= TIME_WINDOW
-                event_count_condition = len(self.event_buffer) >= 500
+                event_count_condition = len(self.event_buffer) >= 100
 
                 if time_condition or event_count_condition:
                     self.batch_number += 1
@@ -288,7 +290,7 @@ class MqttClient:
             self.stop_processing()
             self.client.loop_stop()
 
-mqtt_client = MqttClient()
+
 
 def get_current_batch():
     global mqtt_client 
@@ -299,7 +301,8 @@ def get_matching_pairs():
     return matching_pairs
 
 def start_client():
-    global mqtt_client
+    #global mqtt_client
+    mqtt_client = MqttClient()
     mqtt_client.start()
 
 #start_client()

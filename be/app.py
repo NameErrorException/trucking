@@ -47,4 +47,4 @@ def handle_options(response):
 if __name__ == "__main__":
     threading.Thread(target=start_client).start()
     
-    app.run(port=5000, debug=True)
+    app.run(port=5000)
