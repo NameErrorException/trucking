@@ -235,12 +235,20 @@ export default function Home() {
     <div className="container bg-slate-400/1 mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a className=" flex title-font font-medium items-center text-white/80 mb-4 md:mb-0">
       
-      <div><span className="ml-3 text-xl">123 LoadBoard</span></div>
+      <div><span className="ml-2 text-xl"><span class="animate-[wave_5s_ease-in-out_2]">123 LoadBoard👋🏻</span></span></div>
       <div className="ml-32">
     <nav className="md:ml-auto md:mr-auto w-full flex flex-wrap items-center text-base justify-center">
-      <button className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onClick={GoHome}> HOME </button>
-      <button className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onClick={GoRank}> RANKING </button>
-      {/* <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Third Link </a>
+    <button class="relative inline-flex items-center justify-center p-0.5 ml-4 mb-0 me-0 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-slate-700 to-blue-700 group-hover:from-purple-600 group-hover:to-slate-500 hover:text-white dark:text-white" onClick={GoHome}>
+    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+    HOME
+    </span>
+    </button>
+    <button class="relative inline-flex items-center justify-center p-0.5 ml-4 mb-0 me-0 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-slate-700 to-blue-700 group-hover:from-purple-600 group-hover:to-slate-500 hover:text-white dark:text-white" onClick={GoRank}>
+    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+    RANK
+    </span>
+    </button>
+{/* <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Third Link </a>
       <a className="flex flex-col items-center w-32 rounded-2xl mr-5 text-white bg-slate-500 hover:bg-slate-600 active:bg-slate-700 focus:outline-none focus:ring focus:ring-slate-300 shadow-lg transition duration-300 ease-in-out transform hover:scale-105"> Fourth Link </a> */}
     </nav>
     </div>
@@ -282,13 +290,13 @@ export default function Home() {
                 <div className="flex justify-center space-x-4 mb-4">
                   {/* Search Options */}
                   <button
-                    className={`text-white rounded-2xl px-6 py-2 bg-slate-400 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105 ${selectedOption === 'Truck' ? 'bg-orange-300  text-gray-800' : ''}`}
+                    className={`text-white rounded-2xl px-6 py-2 bg-slate-600 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-gray-800 ${selectedOption === 'Truck' ? 'bg-orange-300  text-gray-800' : ''}`}
                     onClick={() => setSelectedOption('Truck')}
                   >
                     Truck
                   </button>
                   <button
-                    className={`text-white rounded-2xl px-6 py-2 bg-slate-400 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105 ${selectedOption === 'Load' ? 'bg-slate-400 text-gray-800' : ''}`}
+                    className={`text-white rounded-2xl px-6 py-2 bg-slate-600 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-gray-800 ${selectedOption === 'Load' ? 'bg-slate-400 text-gray-800' : ''}`}
                     onClick={() => setSelectedOption('Load')}
                   >
                     Load
