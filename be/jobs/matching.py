@@ -23,6 +23,8 @@ trucks_by_type = defaultdict(set)
 loads_by_type = defaultdict(list)
 unassigned_trucks = set()
 
+all_events = []
+
 # Helper functions
 def parse_timestamp(timestamp_str):
     return datetime.datetime.fromisoformat(timestamp_str)
@@ -205,7 +207,7 @@ def remove_assigned_load(assigned_load):
 
 class MqttClient:
     def __init__(self):
-        self.client = mqtt.Client(client_id="NNE" + str(random.randint(0, 1000)), clean_session=True)
+        self.client = mqtt.Client(client_id="NNE" + str(random.randint(0, 1000000)), clean_session=True)
         self.client.username_pw_set("CodeJamUser", "123CodeJam")
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
@@ -240,7 +242,7 @@ class MqttClient:
                 break  # Exit the processing after end of day
             
     def on_message(self, client, userdata, msg):
-        global matching_pairs
+        global matching_pairs, all_events
         try:
             event = json.loads(msg.payload.decode())
 
@@ -248,6 +250,7 @@ class MqttClient:
                 self.collect_events = True
                 self.event_buffer = []
                 matching_pairs = []
+                all_events = []
                 self.start_time = parse_timestamp(event['timestamp'])
                 if self.processing_thread and self.processing_thread.is_alive():
                     self.processing_thread.join()
@@ -271,6 +274,7 @@ class MqttClient:
                     self.start_time = current_time
                 else:
                     self.event_buffer.append(event)
+                    all_events.append(event)
 
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON: {e}")
@@ -293,8 +297,8 @@ class MqttClient:
 mqtt_client = MqttClient()
 
 def get_current_batch():
-    global mqtt_client 
-    return mqtt_client.event_buffer
+    global all_events 
+    return all_events
 
 def get_matching_pairs():
     global matching_pairs
