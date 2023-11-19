@@ -27,5 +27,12 @@ def get_job_data():
     # the notification job list
     return jsonify(data.get_filtered())
 
+@app.after_request
+def handle_options(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+
+    return response
+
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
