@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import Test from './pages/Test'
 import Truck from './pages/Truck';
 import GoogleMap from './pages/FullPageMap'
+import Ranking from './pages/Ranking'
+
 export default function App() {
   return (
     <div>
@@ -12,6 +14,7 @@ export default function App() {
           <Route index element={<Home />}/>
           <Route path="/truck/*" element={<Truck />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/ranking" element={<Ranking />} />
           <Route path="*" element={<Home />}/>
         </Routes>
       </BrowserRouter>

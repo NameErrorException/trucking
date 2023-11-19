@@ -2,6 +2,7 @@ from flask import Flask, Response, jsonify
 
 from safety.camera import Camera
 from jobs.matching import get_current_batch, get_matching_pairs, start_client
+from safety.ranking import get_ranking
 import threading
 
 app = Flask(__name__)
@@ -32,6 +33,9 @@ def get_current_data():
 def get_job_data():
     return jsonify(get_matching_pairs())
 
+@app.route('/ranking')
+def return_ranking():
+    return jsonify(get_ranking())
 
 @app.after_request
 def handle_options(response):

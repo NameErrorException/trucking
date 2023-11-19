@@ -2,6 +2,7 @@ from ultralytics import YOLO
 from collections import defaultdict 
 import torch, cv2, math
 import numpy as np
+from safety.ranking import update_entry
 
 class Analyze:
     # Load a COCO-pretrained YOLOv8n model
@@ -127,7 +128,7 @@ class Analyze:
                         y1 = track[0][1]
                         x2 = track[-1][0]
                         y2 = track[-1][1]
-                        self.get_3d_speed(frame, x1, y1, x2, y2, x, y)
+                        self.get_3d_speed(frame, x1, y1, x2, y2, int(x - w/2), int(y + h/2))
                     else:
                         pass
                         # set speed to 0
@@ -135,7 +136,7 @@ class Analyze:
                         track.pop(0)
 
                     points = np.hstack(track).astype(np.int32).reshape((-1, 1, 2))
-                    cv2.polylines(frame, [points], isClosed=False, color=(255, 255, 255), thickness=10)
+                    cv2.polylines(frame, [points], isClosed=False, color=(255, 255, 255), thickness=5)
         except Exception as e:
             pass
 
@@ -183,6 +184,8 @@ class Analyze:
             self.draw_text(anotated_frame, 0, 25, 1, f"truck id: {truckId}")
             self.draw_text(anotated_frame, 0, 60, 1, f"speed status: {speed_status}")
             self.draw_text(anotated_frame, 0, 95, 1, f"safety score: {safety_score}%")
+
+            update_entry(truckId, safety_score)
 
             return anotated_frame
         except Exception as e:
