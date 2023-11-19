@@ -36,7 +36,6 @@ def handle_options(response):
     return response
 
 if __name__ == "__main__":
-    start_client()
     threading.Thread(target=start_client).start()
     
     app.run(port=5000, debug=True)
