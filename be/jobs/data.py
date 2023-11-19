@@ -43,6 +43,7 @@ class Data:
         self.client.loop_forever()
 
     def get_current_data(self):
+        
         temp_data = [
             {"seq":1935,"type":"Truck","timestamp":"2023-11-17T18:43:37","truckId":358,"positionLatitude":36.94601821899414,"positionLongitude":-81.04188537597656,"equipType":"Flatbed","nextTripLengthPreference":"Short"},
             {"seq":1926,"type":"Truck","timestamp":"2023-11-17T18:42:46","truckId":268,"positionLatitude":39.38967514038086,"positionLongitude":-84.36373138427734,"equipType":"Van","nextTripLengthPreference":"Short"},
@@ -70,14 +71,12 @@ class Data:
                 "truckId": 358,
                 "notifications": [
                     {"timestamp":"2023-11-17T18:41:19","loadId":10408,"originLatitude":42.7893,"originLongitude":-73.9809,"destinationLatitude":41.7761,"destinationLongitude":-72.5213,"equipmentType":"Van","price":497.0,"mileage":129.0},
-                    {"timestamp":"2023-11-17T09:31:59","loadId":10987,"originLatitude":39.19,"originLongitude":-76.72,"destinationLatitude":41.29,"destinationLongitude":-81.48,"equipmentType":"Van","price":650.0,"mileage":350.0}
                 ]
             },
             {
                 "truckId": 268,
                 "notifications": [
                     {"timestamp":"2023-11-17T18:41:19","loadId":10408,"originLatitude":42.7893,"originLongitude":-73.9809,"destinationLatitude":41.7761,"destinationLongitude":-72.5213,"equipmentType":"Van","price":497.0,"mileage":129.0},
-                    {"timestamp":"2023-11-17T09:31:59","loadId":10987,"originLatitude":39.19,"originLongitude":-76.72,"destinationLatitude":41.29,"destinationLongitude":-81.48,"equipmentType":"Van","price":650.0,"mileage":350.0}
                 ]
             } 
         ]

@@ -1,11 +1,12 @@
 from flask import Flask, Response, jsonify
 
 from safety.camera import Camera
-from jobs.data import Data
+from jobs.matching import get_current_batch, get_matching_pairs, start_client
+import threading
 
 app = Flask(__name__)
 camera = Camera()
-data = Data()
+#matching = Matching()
 
 # NOTE:
 # https://www.digitalocean.com/community/tutorials/how-to-create-your-first-web-application-using-flask-and-python-3
@@ -20,12 +21,12 @@ def get_camera():
 
 @app.route('/data')
 def get_current_data():
-    return jsonify(data.get_current_data())
+    return jsonify(get_current_batch())
 
 @app.route('/filtered')
 def get_job_data():
-    # the notification job list
-    return jsonify(data.get_filtered())
+    return jsonify(get_matching_pairs())
+
 
 @app.after_request
 def handle_options(response):
@@ -35,4 +36,7 @@ def handle_options(response):
     return response
 
 if __name__ == "__main__":
+    start_client()
+    threading.Thread(target=start_client).start()
+    
     app.run(port=5000, debug=True)

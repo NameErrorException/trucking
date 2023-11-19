@@ -87,8 +87,12 @@ def calculate_score(load, truck, profit_weight = 0.5, deadhead_weight = 0.5, oth
 
 profit_weight, deadhead_weight, other_weights = 0.5, 0.5, 0
 
+matching_pairs = []
 
 def perform_batch_matching(events, batch_number):
+    global matching_pairs
+    matching_pairs = []  # Reset for the new batch
+
     # Initialize the set for keeping track of matched load IDs
     matched_load_ids = set()
     matched_truck_keys = set()  # Store (truck_id, event_id)
@@ -122,6 +126,12 @@ def perform_batch_matching(events, batch_number):
             load = loads_list[load_idx]
             if truck_key in unassigned_trucks:
                 print(f"Batch {batch_number} Assignment: Truck {truck_key[0]} (Event {truck_key[1]}) assigned to Load {load['loadId']} (Event {load['seq']})")
+                matching_pairs.append({
+                    'truck_id': truck_key[0],
+                    'truck_event_id': truck_key[1],
+                    'load_id': load['loadId'],
+                    'load_event_id': load['seq']
+                })
                 unassigned_trucks.remove(truck_key)
                 remove_assigned_load(load)
                 matched_load_ids.add(load['loadId'])
@@ -143,6 +153,9 @@ def perform_batch_matching(events, batch_number):
 
 
 def end_of_day_matching():
+    global matching_pairs
+    matching_pairs = []  # Reset for the new batch
+    
     trucks_list = list(unassigned_trucks)
     loads_list = [load for loads in loads_by_type.values() for _, _, load in loads]
     num_trucks = len(trucks_list)
@@ -167,6 +180,12 @@ def end_of_day_matching():
         truck_id = trucks_list[truck_idx]
         load = loads_list[load_idx]
         print(f"End of Day Assignment: Truck {truck_id} assigned to Load {load['loadId']}")
+        matching_pairs.append({
+                    'truck_id': truck_key[0],
+                    'truck_event_id': truck_key[1],
+                    'load_id': load['loadId'],
+                    'load_event_id': load['seq']
+                })
         unassigned_trucks.remove(truck_id)
         remove_assigned_load(load)
 
@@ -183,34 +202,6 @@ def remove_assigned_load(assigned_load):
     load_type = assigned_load['equipmentType']
     if load_type in loads_by_type:
         loads_by_type[load_type] = [(time, seq, load) for time, seq, load in loads_by_type[load_type] if load['loadId'] != assigned_load['loadId']]
-
-def main(events):
-    event_buffer = []  # Buffer to store events
-    start_time = None  # Time when the first event was received
-    batch_number = 1  # Initialize batch number
-
-    for event in events:
-        current_time = parse_timestamp(event['timestamp'])
-
-        if start_time is None:
-            start_time = current_time
-
-        event_buffer.append(event)
-
-        time_condition = current_time - start_time >= TIME_WINDOW
-        #time_condition = False
-        event_count_condition = len(event_buffer) >= 100
-
-        if time_condition or event_count_condition:
-            event_buffer = perform_batch_matching(event_buffer, batch_number)
-            start_time = None
-            batch_number += 1  # Increment batch number for next batch
-
-    if len(event_buffer) > 0:
-        perform_batch_matching(event_buffer, batch_number)
-
-    # End of day matching for any remaining trucks
-    end_of_day_matching()
 
 class MqttClient:
     def __init__(self):
@@ -297,7 +288,18 @@ class MqttClient:
             self.stop_processing()
             self.client.loop_stop()
 
-# Start the MQTT client if script is run as main
-if __name__ == "__main__":
-    mqtt_client = MqttClient()
+mqtt_client = MqttClient()
+
+def get_current_batch():
+    global mqtt_client 
+    return mqtt_client.event_buffer
+
+def get_matching_pairs():
+    global matching_pairs
+    return matching_pairs
+
+def start_client():
+    global mqtt_client
     mqtt_client.start()
+
+#start_client()
