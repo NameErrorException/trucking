@@ -4,10 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const MapComponent = () => {
   const [users, setUsers] = useState([]);
-  const [trucks, setTrucks] = useState({});
   const mapRef = useRef(null); // useRef to hold the map instance
-
-
   const directionsServiceRef = useRef(null);
   const directionsRendererRef = useRef(null);
 
@@ -105,31 +102,26 @@ const MapComponent = () => {
   };
 
   const fetchUserData = () => {
-    Promise.all([
-      fetch("http://127.0.0.1:5000/data").then(response => response.json()),
-      fetch("http://127.0.0.1:5000/filtered").then(response => response.json())
-    ])
-    .then(([data, filteredData]) => {
-      const newTrucks = {};
-
-      fetchedData.forEach(item => {
-        if (item.type === "Truck") {
-          newTrucks[item.id] = { ...item, loads: [] };
-        }
-      });
-
-      filteredData.forEach(filteredItem => {
-        const load_id = filteredItem.load_id;
-        const truck_id = filteredItem.truck_id;
-        const load = fetchedData.find(item => item.type === "Load" && item.loadId === load_id);
-        const truck = newTrucks[truck_id];
-
-        if (load && truck) {
-          truck.loads.push(load_id);
-          load.assigned = truck_id; // Add new attribute 'assigned' to the load
-        }
-      });
-        setTrucks(newTrucks);
+    fetch("http://127.0.0.1:5000/data")
+      .then(response => response.json())
+      .then(data => {
+        setUsers(data);
+        data.forEach(item => {
+          if (item.type === "Truck") {
+            // Add a marker for the truck
+            new window.google.maps.Marker({
+              position: { lat: item.positionLatitude, lng: item.positionLongitude },
+              map: mapRef.current,
+              label: 'T'
+            });
+          } else if (item.type === "Load") {
+            // Log message for the load
+            console.log('This is a Load');
+            calculateAndDisplayRoute(item);
+          } else {
+            console.log('1')
+          }
+        });
       })
       .catch(error => console.error('Error fetching user data:', error));
   };
@@ -187,49 +179,3 @@ const calculateAndDisplayRoute = (load) => {
 };
 
 export default MapComponent;
-
-
-
-const displayRoutesForTruck = (truckId) => {
-  const truck = trucks[truckId];
-  if (!truck) {
-    console.error('Truck not found');
-    return;
-  }
-
-  const directionsService = new window.google.maps.DirectionsService();
-  const directionsRenderer = new window.google.maps.DirectionsRenderer();
-  directionsRenderer.setMap(mapRef.current);
-
-  let lastDestination = { lat: truck.positionLatitude, lng: truck.positionLongitude }; // Starting point is the truck's current location
-
-  truck.loads.forEach(loadId => {
-    const load = data.find(item => item.id === loadId && item.type === "Load");
-    if (load) {
-      const loadOrigin = new window.google.maps.LatLng(load.originLatitude, load.originLongitude);
-      const loadDestination = new window.google.maps.LatLng(load.destinationLatitude, load.destinationLongitude);
-
-      // Route from last destination to load's origin
-      plotRoute(directionsService, directionsRenderer, lastDestination, loadOrigin);
-
-      // Route from load's origin to load's destination
-      plotRoute(directionsService, directionsRenderer, loadOrigin, loadDestination);
-
-      lastDestination = loadDestination; // Update last destination to current load's destination
-    }
-  });
-};
-
-const plotRoute = (directionsService, directionsRenderer, start, end) => {
-  directionsService.route({
-    origin: start,
-    destination: end,
-    travelMode: window.google.maps.TravelMode.DRIVING
-  }, (response, status) => {
-    if (status === 'OK') {
-      directionsRenderer.setDirections(response);
-    } else {
-      console.error('Directions request failed due to ' + status);
-    }
-  });
-};
