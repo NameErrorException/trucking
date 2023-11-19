@@ -44,13 +44,7 @@ export default function Home() {
     };
   }, []);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      fetchData(); // Fetch data at regular intervals
-    }, 500); // Interval set to 1 minute (60000 ms)
 
-    return () => clearInterval(intervalId); // Clear interval on unmount
-  }, []);
 
   // Initialize Google Map
   const initMap = () => {
