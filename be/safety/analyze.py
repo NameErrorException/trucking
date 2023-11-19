@@ -162,7 +162,7 @@ class Analyze:
     def new_camera(self):
         self.num_good = self.num_frames = 0
 
-    def frame(self, frame):
+    def frame(self, frame, truckId):
         self.num_frames += 1
         # edge detect
         try:
@@ -180,8 +180,9 @@ class Analyze:
             speed_status = self.get_speed_status()
             safety_score = round((self.num_good / self.num_frames) * 100, 2)
 
-            self.draw_text(anotated_frame, 0, 25, 1, f"speed status: {speed_status}")
-            self.draw_text(anotated_frame, 0, 60, 1, f"safety score: {safety_score}%")
+            self.draw_text(anotated_frame, 0, 25, 1, f"truck id: {truckId}")
+            self.draw_text(anotated_frame, 0, 60, 1, f"speed status: {speed_status}")
+            self.draw_text(anotated_frame, 0, 95, 1, f"safety score: {safety_score}%")
 
             return anotated_frame
         except Exception as e:

@@ -15,9 +15,14 @@ camera = Camera()
 def hello():
     return {"test": True}
 
-@app.route('/camera')
-def get_camera():
-    return Response(camera.get_frame(), mimetype='multipart/x-mixed-replace; boundary=frame')
+@app.route('/camera/<truckId>')
+def get_camera(truckId):
+    try:
+        truckId = int(truckId)
+    except:
+        return {'failed': True}
+
+    return Response(camera.get_frame(truckId), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/data')
 def get_current_data():

@@ -15,7 +15,7 @@ class Camera:
     def get_video(self):  
         return self.path + self.video_file
 
-    def get_frame(self):
+    def get_frame(self, truckId):
         # reset video frames
         self.analyze.new_camera()
 
@@ -32,7 +32,7 @@ class Camera:
             success, frame = video.read()
             if success:
                 # analysis
-                frame = self.analyze.frame(frame)
+                frame = self.analyze.frame(frame, truckId)
 
                 ret, buffer = cv2.imencode(".jpg", frame)
                 frame = buffer.tobytes()
