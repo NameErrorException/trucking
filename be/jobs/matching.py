@@ -9,7 +9,7 @@ from scipy.optimize import linear_sum_assignment
 import paho.mqtt.client as mqtt
 import threading
 import queue
-
+import random
 
 # Constants
 TIME_WINDOW = datetime.timedelta(minutes=240)  # 6 hours time window
@@ -205,7 +205,7 @@ def remove_assigned_load(assigned_load):
 
 class MqttClient:
     def __init__(self):
-        self.client = mqtt.Client(client_id="NNE09", clean_session=True)
+        self.client = mqtt.Client(client_id="NNE" + str(random.randint(0, 1000)), clean_session=True)
         self.client.username_pw_set("CodeJamUser", "123CodeJam")
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
@@ -302,4 +302,4 @@ def start_client():
     global mqtt_client
     mqtt_client.start()
 
-#start_client()
+start_client()
