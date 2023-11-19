@@ -164,6 +164,8 @@ export default function Home() {
           map: mapRef.current,
           label: 'T'
         });
+        const directionsRenderer = new window.google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(mapRef.current);
         const origin = new window.google.maps.LatLng(itemm.originLatitude, itemm.originLongitude);
         const destination = new window.google.maps.LatLng(itemm.destinationLatitude, itemm.destinationLongitude);
         directionsServiceRef.current.route({
@@ -201,10 +203,16 @@ export default function Home() {
       }
     });}
     const itemmm = trucks.find(t => t.truckId === load.truck_id)
-    if(itemmm){new window.google.maps.Marker({
+    if(itemmm){
+      const marker = new window.google.maps.Marker({
       position: { lat: itemmm.positionLatitude, lng: itemmm.positionLongitude },
       map: mapRef.current,
-      label: 'T'});}
+      label: 'T'});
+      marker.addListener("click", () => {
+        map.setZoom(8);
+        map.setCenter(marker.getPosition());
+      });
+    }
   };
   
   let navigate = useNavigate();
