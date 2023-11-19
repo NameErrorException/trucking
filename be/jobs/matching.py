@@ -302,4 +302,4 @@ def start_client():
     global mqtt_client
     mqtt_client.start()
 
-start_client()
+#start_client()

@@ -6,16 +6,17 @@ import MapComponent from './MapAsset/mapComponent';
 
 export default function Home() {
   let navigate = useNavigate();
-  const routeChange = () =>{
-  let path = '/truck';
-  navigate(path)
-  }
-  //fatch data
+  const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  const routeChange = () => {
+    let path = '/truck';
+    navigate(path);
   };
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const toggleSearchBar = () => {
+    setIsSearchBarOpen(!isSearchBarOpen);
+  };
+  
 
 
   return (
@@ -37,12 +38,12 @@ export default function Home() {
     </nav>
     </div>
     <div className="absolute top-4 right-14 h-16 w-16 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
-      <button onClick={toggleSidebar} class=" bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+      <button onClick={toggleSearchBar} class=" bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
         </svg>
 
-        <span>Trucks</span>
+        <span>Search</span>
       </button>
     </div>
     </a>
@@ -52,23 +53,27 @@ export default function Home() {
       <MapComponent />
     </div>
 
-    {isSidebarOpen && (      
-    <div className="flex flex-wrap">
-        {/* Sidebar */}
-        <aside className="mt-20 text-gray-400 bg-transparent body-font w-1/5 overflow-y-auto h-screen fixed top-0 right-10">
-          <div className="container mx-auto flex flex-col items-center p-5 ">
-           
-            <nav className="md:ml-auto md:mr-auto flex flex-col items-center text-base">
-              <button className="w-20 text-white rounded-2xl bg-orange-300 mb-4 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onClick={routeChange}>Truck 1</button>
-              <button className="w-20 text-white rounded-2xl bg-orange-300 mb-4 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105 " onClick={routeChange}>Truck 2</button>
-              <button className="w-20 text-white rounded-2xl bg-orange-300 mb-4 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onClick={routeChange}>Truck 3</button>
-              <button className="w-20 text-white rounded-2xl bg-orange-300 mb-4 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onClick={routeChange}>Truck 3</button>
-              <button className="w-20 text-white rounded-2xl bg-orange-300 hover:hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onClick={routeChange}>Truck 4</button>
-            </nav>
+    {isSearchBarOpen && (
+          <div className="flex flex-wrap">
+            {/* Search Bar */}
+            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-400 bg-opacity-50 p-10 rounded-xl">
+              <div className="container mx-auto flex flex-col items-center p-5">
+                {/* Add  search bar components here */}
+                <input
+                  type="text"
+                  placeholder="Truck Search..."
+                  className="w-full px-10 py-2 border rounded focus:outline-none focus:border-blue-500"
+                />
+                <button
+                  className="w-full text-white rounded-2xl bg-orange-300 py-2 hover:text-white shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+                  onClick={routeChange}
+                >
+                  Search
+                </button>
+              </div>
+            </div>
           </div>
-        </aside>
-     </div>
-    )}
+        )}
   
    </div>
 
